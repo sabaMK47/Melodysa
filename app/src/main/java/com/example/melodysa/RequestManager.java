@@ -7,17 +7,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestManager {
 
-
+    public static Retrofit retrofit=null;
     Context context;
-
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api-beta.melobit.com/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
+    public static Requests getRetrofitClient() {
+        if(retrofit==null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api-beta.melobit.com/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit.create(Requests.class);
+    }
     public RequestManager(Context context){
         this.context=context;
     }
+
+
 }
 
 
